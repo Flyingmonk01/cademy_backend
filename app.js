@@ -2,7 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import ErrorMiddleware from "./middlewares/Error.js";
-
+import cors from "cors";
 
 
 config({
@@ -25,6 +25,20 @@ app.use(
 
 
 app.use(cookieParser());
+
+
+
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
+
+
 
 // Importing and Using routes
 import course from "./routes/courseRoutes.js";
